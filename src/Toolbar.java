@@ -1,0 +1,67 @@
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+public class Toolbar extends JPanel implements ActionListener{
+
+    private JButton playButton;
+    private JButton pauseButton;
+    private JButton stopButton;
+    private JButton resumeButton;
+    private  StringListener textListener;
+    public Toolbar() {
+
+        playButton = new JButton("Play");
+        pauseButton = new JButton("Pause");
+        stopButton = new JButton("Stop");
+        resumeButton = new JButton("Resume");
+        
+        
+        playButton.addActionListener(this);
+        pauseButton.addActionListener(this);
+        stopButton.addActionListener(this);
+        resumeButton.addActionListener(this);
+        
+        
+        setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        add(playButton);
+        add(pauseButton);
+        add(stopButton);
+        add(resumeButton);
+    }
+
+    public void setStringListener(StringListener listener) {
+        this.textListener = listener;
+    }
+//    public void setTextPanel(TextPanel textPanel) {
+//        this.textPanel = textPanel;
+//    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        // Get the button clicked and cast it
+       JButton clicked = (JButton) e.getSource();
+       
+       if(clicked == playButton) {
+           if(textListener != null) {
+               textListener.textEmitted("Play");
+           }
+       }
+       else if(clicked == pauseButton) {
+           if(textListener != null) {
+               textListener.textEmitted("Pause");
+           }
+       } else if(clicked == stopButton){
+            if(textListener != null) {
+                textListener.textEmitted("Stop");
+            }
+        } else {
+        	 if(textListener != null) {
+                 textListener.textEmitted("Resume");
+             }
+        }
+    }
+}
